@@ -8,14 +8,48 @@
     <title>Document</title>
 </head>
 <body >
+<div id="top-bar" class="position-fixed h-5 w-100 bg-dark">
+
+    <button class=" px-5 btn btn-dark">Today</button>
+    <button class="btn btn-dark">5-day forecast</button>
+
+</div>   
 <div class="bg-light">
-    <!-- • дата;• иконка;• текстовое описание;• температура;
-    • как ощущается температура;• рассвет;• закат;• длительность дня. -->
-    <div id = "current-weather" class="container w-95 shadow-sm p-3 mb-5 bg-body rounded">
-        <div class="d-flex justify-content-evenly">
-            <h4>Current Weather</h4>
-            <p id="date"></p>
+
+    <div id = "current-weather" class="container w-95 shadow-sm p-1 mb-5 bg-body rounded">
+        <div class="d-flex justify-content-between align-items-start w-100 h-10">
+            <h4 class='p-0'>Current Weather</h4>
+            <p class='p-0' id="date"></p>
         </div>
+        
+        <div id ="current-weather-bottom" class="d-flex justify-content-evenly">
+            <div>
+                <img id="current-weather-image"></img>
+                <h6 id="current-weather-text"></h5>
+            </div>
+            <div class="d-flex justify-content-center align-items-center">
+                <div>
+                    <h4 class="p-0 m-0" id="current-weather-temp"></h6>
+                    <p class="p-0 m-0" id="current-weather-feel"></p>
+                </div>
+            </div>
+            <div class = "d-flex justify-content-center align-items-center" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                <ul id="current-weather-time-list" style = "list-style-type: none;">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div id = "current-weather" class="container w-95 shadow-sm p-1 mb-5 bg-body rounded">
+        <div>
+            <h6>Hourly</h6>
+        </div>
+        
 
     </div>
 </div>
