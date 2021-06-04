@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="./style.css">
     <title>Document</title>
 </head>
 <body >
@@ -45,11 +46,18 @@
 
     </div>
 
-    <div id = "current-weather" class="container w-95 shadow-sm p-1 mb-5 bg-body rounded">
-        <div>
+    <div id = "hourly-weather" class="container w-95 shadow-sm p-1 mb-5 bg-body rounded">
+        <div>   
             <h6>Hourly</h6>
         </div>
-        
+        <table id="hourly-table" class="table">
+            <tr class="hourly-weather-table-row" id="hourly-table-hour"> <th id="hourly-weather-day"></th>   </tr>
+            <tr class="hourly-weather-table-row" id="hourly-table-forecast"> <th>Forecast</th>   </tr>
+            <tr class="hourly-weather-table-row" id="hourly-table-temp"> <th>Temp(°C)</th>   </tr>
+            <tr class="hourly-weather-table-row" id="hourly-table-feel"> <th>Feels like</th>   </tr>
+            <tr class="hourly-weather-table-row" id="hourly-table-wind"> <th>Wind(km/h)</th>   </tr>
+            
+        </table>
 
     </div>
 </div>
