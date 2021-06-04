@@ -1,4 +1,11 @@
+.hourly-weather-table-row th
+{
+    padding:0;
+    margin:0;
+    text-align: center;
+}
 .hourly-weather-table-row td
 {
-    max-width: 100px;
+    padding:0;
+    margin:0;
 }

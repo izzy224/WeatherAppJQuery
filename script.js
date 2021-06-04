@@ -15,7 +15,7 @@ $.getJSON(url, (data) => {
     let imgPath = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
 
     $("#current-weather-image").attr("src",imgPath);
-    $("#current-weather-text").text(data.weather[0].description);
+    $("#current-weather-text").text(data.weather[0].main);
 
     $("#current-weather-temp").text(Math.round(data.main.temp)+"°C")
     $("#current-weather-feel").text(`Real feel ${Math.round(data.main.feels_like)}°C`)
@@ -36,6 +36,8 @@ $.getJSON(hourlyUrl,(data) =>{
     console.log(data);
     $("#hourly-weather-day").append(currentDate.toLocaleDateString('en-us', { weekday: 'long' }))
     
+  
+
     for(let i = 0; i < hoursNumber ; i++)
     {
             let hour = new Date (data.list[i].dt_txt);
@@ -43,10 +45,55 @@ $.getJSON(hourlyUrl,(data) =>{
             $("#hourly-table-hour").append(`<td><p class = "text-center m-0">${hour.toLocaleString('en-US', { hour: 'numeric', hour12: true })}</p>
                                         <img src="http://openweathermap.org/img/wn/${data.list[i].weather[0].icon}@2x.png"></img>
                                     </td>`);
-    //      $("")
-    //      $(".current-weather-table-row:eq(2)")
-    //      $(".current-weather-table-row:eq(3)")
-    //      $(".current-weather-table-row:eq(4)")
-
+          $("#hourly-table-forecast").append(`<td> <p class = "text-center m-0">${data.list[i].weather[0].main}</p> </td>`);
+          $("#hourly-table-temp").append(`<td> <p class = "text-center m-0">${Math.round(data.list[i].main.temp)}°</p> </td>`);
+          $("#hourly-table-feel").append(`<td> <p class = "text-center m-0">${Math.round(data.list[i].main.feels_like)}°</p> </td>`);
+          $("#hourly-table-wind").append(`<td> <p class = "text-center m-0">${Math.round(data.list[i].wind.speed*3.6)} ${degToCard(data.list[i].wind.deg)}</p> </td>`);
+            //speed is displayed in m/s probably, so multiply by 3.6 to get km/h, for direction I used the function degToCard
+    
     }
+
+    //$("#hourly-table-hour td p").css("width", `${$("#hourly-table-hour td img").css("width")}`); // set p width the same as img width
+    //$("#hourly-table-forecast td p").css("width", `${$("#hourly-table-hour td img").css("width")}`);
+    $("#hourly-table-hour td img").css("width", `${this.innerWidth/1536*100}`);//Image gets sized with the viewport - Ma mandresc cu linia asta :)
+    //1536 era valoarea innerWidth a ecranului meu, pentru ca pe toate ecranele sa tina acelasi raport - ca sa lucreze bine si pentru
+    //alte device-uri, ar trebui de dat scale si la font-size(dar asa el lucreaza  bine cu width 500+)
+    $(".hourly-weather-table-row td p").css("width", `${$("#hourly-table-hour td img").css("width")}`); //set text width same as img width
 })
+
+
+var degToCard = function(deg){//Not my code but too lazy to turn degrees into cardinal direction
+    if (deg>11.25 && deg<=33.75){
+      return "NNE";
+    }else if (deg>33.75 && deg<=56.25){
+      return "ENE";
+    }else if (deg>56.25 && deg<=78.75){
+      return "E";
+    }else if (deg>78.75 && deg<=101.25){
+      return "ESE";
+    }else if (deg>101.25 && deg<=123.75){
+      return "ESE";
+    }else if (deg>123.75 && deg<=146.25){
+      return "SE";
+    }else if (deg>146.25 && deg<=168.75){
+      return "SSE";
+    }else if (deg>168.75 && deg<=191.25){
+      return "S";
+    }else if (deg>191.25 && deg<=213.75){
+      return "SSW";
+    }else if (deg>213.75 && deg<=236.25){
+      return "SW";
+    }else if (deg>236.25 && deg<=258.75){
+      return "WSW";
+    }else if (deg>258.75 && deg<=281.25){
+      return "W";
+    }else if (deg>281.25 && deg<=303.75){
+      return "WNW";
+    }else if (deg>303.75 && deg<=326.25){
+      return "NW";
+    }else if (deg>326.25 && deg<=348.75){
+      return "NNW";
+    }else{
+      return "N"; 
+    }
+  }
