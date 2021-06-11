@@ -9,14 +9,14 @@
     <title>Document</title>
 </head>
 <body >
-<div id="top-bar" class="position-fixed h-5 w-100 bg-dark">
+<div id="top-bar" class=" h-5 w-100 bg-dark">
 
-    <button class=" px-5 btn btn-dark">Today</button>
-    <button class="btn btn-dark">5-day forecast</button>
+    <button class=" px-5 btn btn-dark" id="today-button">Today</button>
+    <button class="btn btn-dark" id="five-day-button">5-day forecast</button>
 
 </div>   
 <div class="bg-light">
-    <div class = "today">
+    <div id = "today">
     <div id = "current-weather" class="container w-95 shadow-sm p-1 mb-5 bg-body rounded">
         <div class="d-flex justify-content-between align-items-start w-100 h-10">
             <h4 class='p-0'>Current Weather</h4>
@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class = "d-flex justify-content-center align-items-center" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
-                <ul id="current-weather-time-list" style = "list-style-type: none;">
+                <ul id="current-weather-time-list">
                     <li></li>
                     <li></li>
                     <li></li>
@@ -63,15 +63,19 @@
     </div>
 
 
-    <div class = "five-day-forecast">
-
-
+    <div id = "five-day-forecast">
+        <div id = "five-day-display" class="container w-95 shadow-sm mb-5 bg-body rounded d-flex">
+            <ul class = "w-100 h-100 d-flex justify-content-between" id="five-day-daily-list">
+            </ul>
+        </div>
+        <div id = "five-day-display" class="container w-95 shadow-sm mb-5 bg-body rounded ">
+        </div>
     </div>
 </div>
 
-
     <script src="./node_modules/jquery/dist/jquery.js"></script>
-
+    <script src="./js/utility.js"></script>
     <script src="./js/script.js"></script>
+    <script src="./js/five-day-forecast.js"></script>
 </body>
 </html>

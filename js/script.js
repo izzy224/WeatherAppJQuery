@@ -1,22 +1,14 @@
-
-const APIKey = "578f47eee8961c9e26c7e6ace6d5004a";
-const city = "Chisinau";
-//const URL = `api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`;
-const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}&units=metric`;
-const hourlyUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=metric`;
-// //http://openweathermap.org/img/wn/10d@2x.png
-
 var currentDate;
 var hoursNumber = 6; //Number of hour positions displayed on page, 6 by standart
+$("#today-button").attr("disabled",true);//Page by default starts on today forecast
+
 
 function todayTab(){
-
-
   //Gets and prints current weather
 $.getJSON(url, (data) => {
     console.log(data);
      currentDate = new Date(data.sys.sunset*1000)
-    $("#date").text(`${currentDate.toLocaleDateString('en-us', { weekday: 'long' })}, ${currentDate.getDate()}.${currentDate.getMonth()}.${currentDate.getFullYear()}`);
+    $("#date").text(`${currentDate.toLocaleDateString('en-us', { weekday: 'long' })}, ${currentDate.getDate()}.${currentDate.getMonth()+1}.${currentDate.getFullYear()}`);
     let imgPath = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
 
     $("#current-weather-image").attr("src",imgPath);
@@ -40,6 +32,7 @@ $.getJSON(url, (data) => {
   //Gets and prints hourly forecast
 $.getJSON(hourlyUrl,(data) =>{
     console.log(data);
+    hourlyData = data;
 
     //Clears out everything, in case of update
     $("#hourly-weather-day").html("");
@@ -72,53 +65,22 @@ $.getJSON(hourlyUrl,(data) =>{
 
     //$("#hourly-table-hour td p").css("width", `${$("#hourly-table-hour td img").css("width")}`); // set p width the same as img width
     //$("#hourly-table-forecast td p").css("width", `${$("#hourly-table-hour td img").css("width")}`);
-    $("#hourly-table-hour td img").css("width", `${this.innerWidth/1536*100}`);//Image gets sized with the viewport - Ma mandresc cu linia asta :)
+    $("#hourly-table-hour td img").css("width", `${this.innerWidth/1536*100}`);
+    //Image gets sized with the viewport - Ma mandresc cu linia asta :)
     //1536 era valoarea innerWidth a ecranului meu, pentru ca pe toate ecranele sa tina acelasi raport - ca sa lucreze bine si pentru
     //alte device-uri, ar trebui de dat scale si la font-size(dar asa el lucreaza  bine cu width 500+)
     $(".hourly-weather-table-row td p").css("width", `${$("#hourly-table-hour td img").css("width")}`); //set text width same as img width
 })
-
 }
-var degToCard = function(deg){//Not my code but too lazy to turn degrees into cardinal direction
-    if (deg>11.25 && deg<=33.75){
-      return "NNE";
-    }else if (deg>33.75 && deg<=56.25){
-      return "ENE";
-    }else if (deg>56.25 && deg<=78.75){
-      return "E";
-    }else if (deg>78.75 && deg<=101.25){
-      return "ESE";
-    }else if (deg>101.25 && deg<=123.75){
-      return "ESE";
-    }else if (deg>123.75 && deg<=146.25){
-      return "SE";
-    }else if (deg>146.25 && deg<=168.75){
-      return "SSE";
-    }else if (deg>168.75 && deg<=191.25){
-      return "S";
-    }else if (deg>191.25 && deg<=213.75){
-      return "SSW";
-    }else if (deg>213.75 && deg<=236.25){
-      return "SW";
-    }else if (deg>236.25 && deg<=258.75){
-      return "WSW";
-    }else if (deg>258.75 && deg<=281.25){
-      return "W";
-    }else if (deg>281.25 && deg<=303.75){
-      return "WNW";
-    }else if (deg>303.75 && deg<=326.25){
-      return "NW";
-    }else if (deg>326.25 && deg<=348.75){
-      return "NNW";
-    }else{
-      return "N"; 
-    }
-  }
+
+   $("#today-button").on("click",() => {
+
+    todayTab();
+    $("#five-day-forecast").toggle();
+    $("#today").toggle();
+    $("#today-button").attr("disabled",true); 
+    $("#five-day-button").attr("disabled",false);
+  });
 
 
   todayTab();
-
-  function fiveDayForecast()
-  {
-    
-  }
